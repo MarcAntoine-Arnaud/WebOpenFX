@@ -1,0 +1,64 @@
+<!-- extend base layout -->
+{% extends "template.html" %}
+
+{% block content %}
+    <script type="text/javascript">
+
+    
+    
+    function set_openid(openid, pr)
+    {
+        u = openid.search('<username>');
+        if (u != -1) {
+            // openid requires username
+            user = prompt('Enter your ' + pr + ' username:');
+            openid = openid.substr(0, u) + user;
+        }
+        form = document.forms['login'];
+        form.elements['openid'].value = openid;
+    }
+    function submitform()
+    {
+      document.login.submit();
+    }
+    </script>
+
+    <div class="page-header" style="margin-top:100px">
+    <h1 style="text-align:center">Sign In <small>Choose one of the providers below :</small></h1>
+    </div>
+
+   
+    <form action="" method="post" name="login">
+        {{ form.hidden_tag() }}
+
+
+            <p>
+                <div style="display:none">{{ form.openid(size=80) }}</div>
+                {% for error in form.openid.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3"></div>
+            {% for pr in providers %}
+            
+                    <div class="col-xs-4 col-md-2">
+                        <a class="thumbnail" href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');submitform();">
+                            <img src="{{url_for('static', filename='img/'+pr.name+'.png') }}">
+                        </a>
+                    </div>
+                
+            {% endfor %}
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+
+
+
+
+        <!-- <p>{{ form.remember_me }} Remember Me</p> -->
+        <input id="loginSubmit" type="submit" value="Sign In" style="visibility:hidden">
+    </form>
+{% endblock %}

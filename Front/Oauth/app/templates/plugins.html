@@ -1,0 +1,67 @@
+{% extends "template.html" %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <div class="col-md-3 margin30">
+
+
+        <div class="list-group">
+            <a href="/plugins" class="list-group-item active">Liste complete des plugins</a>
+            {% for plugin in dico.plugins %}
+            <a href="/plugins/{{ plugin.id }}" class="list-group-item">{{ plugin.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+        {% if dico.currentPlugin %}
+            {% for plugin in dico.plugins %}
+                {% if dico.currentPlugin == plugin.id %}
+
+                    <div class="page-header">
+                        <h1>{{ plugin.name }} <small>{{ plugin.version }} by {{ plugin.author }}</small></h1>
+                    </div>
+
+                    <h3 class="padding30">Documentation</h3>
+                    <p>
+                        English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+                    </p>
+                    
+                    <h3 class="padding30">Parameters <span class="label label-info">2</span></h3>
+                    <ul class="list-group" style="max-width:400px;">
+                    {% for parameter in plugin.parameters %}
+                        <li class="list-group-item">{{ parameter.name }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+            {% for plugin in dico.plugins %}
+                <div class="page-header">
+                    <h1>{{ plugin.name }} <small>{{ plugin.version }} by {{ plugin.author }}</small></h1>
+                </div>
+
+                <ul class="nav nav-pills" role="tablist">
+                    <li role="presentation" class="active"><a href="/plugins/{{ plugin.id }}">Documentation</a></li>
+                    <li role="presentation"><a href="/plugins/{{ plugin.id }}">Parameters<span>
+                        <!-- {% for parameter in plugin.parameters %}
+                            {{ parameter.name }} 
+                        {% endfor %} -->
+                    </span></a></li>
+                    <li role="presentation"><a href="/plugins/{{ plugin.id }}">Comments</a></li>
+                </ul>
+
+            {% endfor %}
+
+        {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
