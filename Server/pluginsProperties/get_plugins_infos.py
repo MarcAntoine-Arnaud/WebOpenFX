@@ -101,7 +101,7 @@ def getPluginsAllProperties(ofxPluginPath):
 if __name__ == "__main__":
     # app.run(debug=True)
 
-    logging.basicConfig(format='tuttle - %(levelname)s - %(asctime)-15s - %(message)s', filename='logs/pluginProperties.log', filemode='w', level=logging.DEBUG)
+    logging.basicConfig(format='tuttle - %(levelname)s - %(asctime)-15s - %(message)s', filename='/tmp/pluginProperties.log', filemode='w', level=logging.DEBUG)
     
     pluginsAllProperties = getPluginsAllProperties("/home/juliette/Programmation_compilation/webOpenOFX/TuttleOFX/install/")
     # oneProp = getPluginProperties("tuttle.blur");
