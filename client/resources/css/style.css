@@ -51,6 +51,10 @@ a:-webkit-any-link {
 	margin-top: 60px;
 }
 
+.plugin{
+	padding: 5px;
+}
+
 .plugin:nth-child(2n+1){
 	background-color: #333;
 }
