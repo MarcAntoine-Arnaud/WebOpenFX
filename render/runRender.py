@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from flask import Flask, request, jsonify
+import renderScene
 
 app = Flask(__name__, static_folder='', static_url_path='')
 
@@ -24,6 +25,9 @@ def newRender():
 
     ret = { "id" : renderId, "scene" : request.get_json() }
     renders.append( ret )
+
+    r = renderScene.RenderScence()
+    r.render()
 
     return jsonify(**ret)
 

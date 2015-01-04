@@ -1,4 +1,78 @@
 {% extends "base.html" %}
+
+{% block headerExtension %}
+<link rel="stylesheet" type="text/css" href="/resources/css/plugin.css">
+{% endblock %}
+
 {% block content %}
-	<div class="plugin"><span>{{data.WOFX_PLUGIN.id}}</span><span>{{data.WOFX_PLUGIN.version.major}}.{{data.WOFX_PLUGIN.version.minor}}</span></div>
+	<div class="plugin">
+		<span>
+			{% for property in data.WOFX_PLUGIN.properties %}
+				{% if property.name == "OfxPropLabel" %}
+					{{property.value[0]}}
+				{% endif %}
+			{% endfor %}
+		</span>
+		<span>{{data.WOFX_PLUGIN.version.major}}.{{data.WOFX_PLUGIN.version.minor}}</span>
+	</div>
+	<div class="properties">
+		{% for property in data.WOFX_PLUGIN.properties %}
+			<div>
+				<span>{{property.name}}</span>
+				<span>
+					{% if property.value|length == 1 %}
+						{{property.value[0]}}
+					{% else %}
+						{{property.value}}
+					{% endif %}
+				</span>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="parameters">
+		{% for parameter in data.WOFX_PLUGIN.parameters %}
+			<div>
+			{% for property in parameter %}
+				{% if property.name == 'OfxPropName' %}
+					<div>{{property.value[0]}}</div>
+				{% endif %}
+			{% endfor %}
+			{% for property in parameter %}
+				<div class="details">
+					<span>{{property.name}}</span>
+					<span>
+						{% if property.value|length == 1 %}
+							{{property.value[0]}}
+						{% else %}
+							{{property.value}}
+						{% endif %}
+					</span>
+				</div>
+			{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+	<div class="clips">
+		{% for clip in data.WOFX_PLUGIN.clips %}
+			<div>
+			{% for property in clip %}
+				{% if property.name == 'OfxPropName' %}
+					<div>{{property.value[0]}}</div>
+				{% endif %}
+			{% endfor %}
+			{% for property in clip %}
+				<div class="details">
+					<span>{{property.name}}</span>
+					<span>
+						{% if property.value|length == 1 %}
+							{{property.value[0]}}
+						{% else %}
+							{{property.value}}
+						{% endif %}
+					</span>
+				</div>
+			{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
 {% endblock %}

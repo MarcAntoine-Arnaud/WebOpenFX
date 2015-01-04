@@ -1,0 +1,32 @@
+
+.properties:before{
+	content: "Properties";
+	color: #7A9BE2;
+	cursor: pointer;
+}
+
+.parameters:before{
+	content: "Parameters";
+	color: #7A9BE2;
+	cursor: pointer;
+}
+.parameters div{
+	color: #f00;
+	cursor: pointer;
+}
+.parameters div .details{
+	display:none;
+}
+
+.clips:before{
+	content: "Clips";
+	color: #7A9BE2;
+	cursor: pointer;
+}
+.clips div div:nth-child(1){
+	color: #0f0;
+	cursor: pointer;
+}
+.clips div .details{
+	display:none;
+}

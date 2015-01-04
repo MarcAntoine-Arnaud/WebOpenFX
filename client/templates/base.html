@@ -2,8 +2,9 @@
 <html>
 <head>
 	<title>{{data.WOFX_TITLE}}</title>
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet" type="text/css" href="/resources/css/style.css">
 	<link rel="shortcut icon" type="image/x-icon" href="/resource/img/ofx.ico" />
+	{% block headerExtension %}{% endblock %}
 </head>
 <body>
 	<div class="header">

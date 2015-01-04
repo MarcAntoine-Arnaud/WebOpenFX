@@ -2,11 +2,28 @@
 
 {% block content %}
 	{% for plugin in data.WOFX_PLUGINS.plugins %}
+		{% if 'properties' in plugin %}
 		<div class="plugin">
 			<a href="{{data.WOFX_PLUGINS_LINK}}/{{plugin.id}}">
-				<span>{{plugin.id}}</span>
+				<span>
+					{% for property in plugin.properties %}
+						{% if property.name == "OfxPropLabel" %}
+							{{property.value[0]}}
+						{% endif %}
+					{% endfor %}
+				</span>
 				<span>{{plugin.version.major}}.{{plugin.version.minor}}</span>
 			</a>
 		</div>
+		{% else %}
+		<div class="plugin">
+			<a href="{{data.WOFX_PLUGINS_LINK}}/{{plugin.id}}">
+				<span>
+					{{plugin.id}}
+				</span>
+				<span>{{plugin.version.major}}.{{plugin.version.minor}}</span>
+			</a>
+		</div>
+		{% endif %}
 	{% endfor %}
 {% endblock %}

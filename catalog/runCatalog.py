@@ -36,7 +36,7 @@ def getDictOfProperty(prop):
    "readOnly": prop.getPluginReadOnly(),
    "type": prop.getType(),
    "modifiedBy": prop.getModifiedBy(),
-   "values": [pythonType(v) for v in prop.getStringValue().split(', ')]
+   "value": [pythonType(v) for v in prop.getStringValue().split(', ')]
   }
 
 def getDictOfProperties(props):
