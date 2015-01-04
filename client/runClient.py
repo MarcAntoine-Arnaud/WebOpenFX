@@ -34,6 +34,10 @@ def plugin(pluginId):
   parameters['WOFX_PLUGIN'] = plugin.json()
   return render_template('plugin.html', data=parameters)
 
+@app.route('/resource/<path:path>', methods=['GET'])
+def resource(path):
+  return app.send_static_file('resources/' + path)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
