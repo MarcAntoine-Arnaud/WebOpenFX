@@ -7,10 +7,8 @@ app = Flask(__name__, static_folder='', static_url_path='')
 
 version = "0.0.1"
 
-ofxPluginPath = "/home/marco/dev/TuttleOFX/distScons/marco-N150P-N210P-N220P/gcc-4.8/production/plugin/"
-tuttle.core().getPluginCache().addDirectoryToPath(ofxPluginPath)
-pluginCache = tuttle.core().getPluginCache()
 tuttle.core().preload(False)
+pluginCache = tuttle.core().getPluginCache()
 plugins = pluginCache.getPlugins()
 
 @app.route('/', methods=['GET'])
