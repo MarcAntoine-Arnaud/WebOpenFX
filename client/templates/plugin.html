@@ -17,7 +17,7 @@
 	</div>
 	<div class="properties">
 		{% for property in data.WOFX_PLUGIN.properties %}
-			<div>
+			<div class="details">
 				<span>{{property.name}}</span>
 				<span>
 					{% if property.value|length == 1 %}
@@ -33,7 +33,7 @@
 		{% for parameter in data.WOFX_PLUGIN.parameters %}
 			<div>
 			{% for property in parameter %}
-				{% if property.name == 'OfxPropName' %}
+				{% if property.name == 'OfxPropLabel' %}
 					<div>{{property.value[0]}}</div>
 				{% endif %}
 			{% endfor %}

@@ -4,6 +4,9 @@
 	color: #7A9BE2;
 	cursor: pointer;
 }
+.properties .details{
+	display:none;
+}
 
 .parameters:before{
 	content: "Parameters";
