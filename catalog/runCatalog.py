@@ -23,6 +23,7 @@ def getPluginProperties(plugin):
 
   pluginProperties = {
     'id': plugin.getIdentifier(),
+    'uri': "/plugins/"+ plugin.getIdentifier(),
     'rawIdentifier': plugin.getRawIdentifier(),
     'version': {
       'major': plugin.getVersionMajor(),
@@ -30,7 +31,6 @@ def getPluginProperties(plugin):
     },
     'pluginApi': plugin.getPluginApi(),
     'pluginApiVersion': plugin.getApiVersion()
-
   }
 
   return pluginProperties
