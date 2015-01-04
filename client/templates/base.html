@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+	<title>{{data.WOFX_TITLE}}</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+	<div class="header">
+		<span>{{data.WOFX_TITLE}}</span>
+		<span id="logo">
+			<img src="http://openeffects.org/assets/OFX_small-ec3392bec02645ff1bdf59f4c45dfd03.png"/>
+		</span>
+	</div>
+	<ul id="menu">
+		<li><a href="/">Home</a></li>
+		<li><a href="{{data.WOFX_STANDARD_LINK}}">Standard</a></li>
+		<li><a href="{{data.WOFX_PLUGINS_LINK}}">Plugins</a></li>
+	</ul>
+	<div id="main-content">
+		{% block content %}{% endblock %}
+	</div>
+	<div class="footer"><div>version {{data.WOFX_VERSION}}</div></div>
+</body>
+</html>

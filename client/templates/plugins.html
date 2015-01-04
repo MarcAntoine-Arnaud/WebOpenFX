@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% for plugin in data.WOFX_PLUGINS.plugins %}
+		<div class="plugin"><a href="{{data.WOFX_PLUGINS_LINK}}/{{plugin.id}}"><span>{{plugin.id}}</span><span>{{plugin.version.major}}.{{plugin.version.minor}}</span></a></div>
+	{% endfor %}
+{% endblock %}

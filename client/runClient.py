@@ -1,15 +1,38 @@
 #!/usr/bin/python
-
-from flask import Flask
+import requests
+from flask import Flask, render_template
 
 app = Flask(__name__, static_folder='', static_url_path='')
 
 version = "0.0.1"
+catalogRootUri = "http://localhost:5010"
+renderRootUri = "http://localhost:5011"
+
+globalParameters = {
+  "WOFX_TITLE": "WebOpenFX",
+  "WOFX_VERSION": version,
+  "WOFX_STANDARD_LINK": "http://openeffects.org/",
+  "WOFX_PLUGINS_LINK": "/plugins"
+}
 
 @app.route('/', methods=['GET'])
 def index():
-    index = "<html><head><title>WebOpenFX</title></head><body><h1><center>WebOpenFX</center></h1><br/><br/><ul><li>version: " + str(version) + "</li></ul></body>"
-    return index
+  parameters = dict(globalParameters)
+  return render_template('index.html', data=parameters)
+
+@app.route('/plugins/', methods=['GET'])
+def plugins():
+  parameters = dict(globalParameters)
+  plugins = requests.get(catalogRootUri+"/plugins")
+  parameters['WOFX_PLUGINS'] = plugins.json()
+  return render_template('plugins.html', data=parameters)
+
+@app.route('/plugins/<string:pluginId>', methods=['GET'])
+def plugin(pluginId):
+  parameters = dict(globalParameters)
+  plugin = requests.get(catalogRootUri+"/plugins/"+pluginId)
+  parameters['WOFX_PLUGIN'] = plugin.json()
+  return render_template('plugin.html', data=parameters)
 
 
 if __name__ == '__main__':

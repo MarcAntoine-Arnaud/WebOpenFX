@@ -1,0 +1,60 @@
+body{
+	background-color: #000;
+	color:#fff;
+}
+
+a:-webkit-any-link {
+ text-decoration: none;
+ color:#fff;
+}
+
+.header{
+	position: fixed;
+	top:0;
+	left:0;
+	width: 99vw;
+	text-align: center;
+	font-size: 2em;
+	background-color: #000;
+}
+
+.header #logo{
+	float: left;
+}
+
+.footer{
+	position:fixed;
+	bottom:0;
+	width:99vw;
+	text-align: right;
+	color:#666;
+}
+
+#menu{
+	position:fixed;
+	top:0;
+	left:0;
+	margin-top: 60px;
+}
+
+#menu a{
+	color: #7A9BE2;
+}
+
+#menu a:hover{
+	color: #6A8BD2;
+}
+
+#main-content{
+	width:80vw;
+	margin-left: 200px;
+	margin-top: 60px;
+}
+
+.plugin:nth-child(2n+1){
+	background-color: #333;
+}
+
+.plugin span:nth-child(2){
+	float: right;
+}
