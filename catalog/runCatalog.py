@@ -37,7 +37,7 @@ def getPluginProperties(plugin):
 
 @app.route('/plugins', methods=['GET'])
 def getPlugins():
-  pluginsDescription = {'plugins':[]}
+  pluginsDescription = {'plugins':[], 'total': len(plugins)}
   for plugin in plugins:
     pluginsDescription['plugins'].append(getPluginProperties(plugin))
 
