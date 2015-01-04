@@ -32,32 +32,27 @@ def getRequest():
 
 def renderImage(ofxPluginPath, request):
     tuttle.core().getPluginCache().addDirectoryToPath(ofxPluginPath)
-    pluginCache = tuttle.core().getPluginCache()
     tuttle.core().preload(False)
-
+    pluginCache = tuttle.core().getPluginCache()
+    
     g = tuttle.Graph()
 
     time = 0.0
 
     reader = g.createNode("tuttle.jpegreader", filename=request["clips"]["source"])
+    # reader = g.createNode("tuttle.colorwheel")
     logging.info('reading '+request["clips"]["source"])
     processNode = g.createNode(request["nodeName"])
     for paramName, paramValue in request["params"].iteritems():
         processNode.getParam(paramName).setValue(paramValue)
 
-    outputImage="images/output/"+"out"+".jpg"
-    writer = g.createNode( "tuttle.jpegwriter", filename=outputImage)
-    g.connect( [reader, processNode, writer] )
+    outputImage="out.####.jpg"
+    writer = g.createNode( "tuttle.viewer")
+    # writer = g.createNode( "tuttle.jpegwriter", filename=outputImage )
+    # g.connect( [reader, processNode, writer] )
+    g.connect( [ reader, processNode, writer ] )
 
-    hashMap = tuttle.NodeHashContainer()
-    g.computeGlobalHashAtTime(hashMap, time)
-    globalHash = hashMap.getHash(processNode.getName(), time)
-    outputImage = "images/output/"+repr(globalHash)+".jpg"
-
-
-    if os.path.exists(outputImage):
-        logging.info(outputImage+" already exists.")
-        return
+    print g
 
     g.compute( writer )
     logging.info('writing '+outputImage)
@@ -69,6 +64,6 @@ def returnImage(ofxPluginPath, request):
 
 if __name__ == "__main__":
     # app.run(debug=True)
-    logging.basicConfig(format='tuttle - %(levelname)s - %(asctime)-15s - %(message)s', filename='logs/graph.log', filemode='w', level=logging.DEBUG)
-    ofxPluginPath ="/home/juliette/Programmation_compilation/webOpenOFX/TuttleOFX/install/"
+    logging.basicConfig(format='tuttle - %(levelname)s - %(asctime)-15s - %(message)s', filename='/tmp/graph.log', filemode='w', level=logging.DEBUG)
+    ofxPluginPath ="/home/maarnaud/dev/TuttleOFX/dist/maarnaud/gcc-4.9.1/production/plugin/"
     returnImage(ofxPluginPath, getRequest())
