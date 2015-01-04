@@ -1,6 +1,8 @@
 #!/usr/bin/python
+import json
 import requests
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
+from flask import Response
 
 app = Flask(__name__, static_folder='', static_url_path='')
 
@@ -33,6 +35,21 @@ def plugin(pluginId):
   plugin = requests.get(catalogRootUri+"/plugins/"+pluginId)
   parameters['WOFX_PLUGIN'] = plugin.json()
   return render_template('plugin.html', data=parameters)
+
+@app.route('/render/', methods=['POST'])
+def newRender():
+  data = request.data
+  headers = {
+    'Content-Type': 'application/json; charset=utf-8',
+    'Accept-Encoding': 'gzip, deflate'
+  }
+  req = requests.post(renderRootUri+"/render/", data=data, headers=headers)
+  return jsonify(**req.json())
+
+@app.route('/render/<int:renderId>/resources/<resourceId>', methods=['GET'])
+def getRenderResource(renderId, resourceId):
+  req = requests.get(renderRootUri+"/render/"+str(renderId)+"/resources/"+resourceId)
+  return Response(req.content, mimetype="image/jpeg")
 
 @app.route('/resource/<path:path>', methods=['GET'])
 def resource(path):

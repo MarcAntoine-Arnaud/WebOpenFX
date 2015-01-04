@@ -23,9 +23,8 @@ def index():
 
 @app.route('/render/', methods=['POST'])
 def newRender():
-    # print request.form
-    # print request.args
-    # print request.data
+    # print request.headers
+    # print request.get_json()
     project = request.get_json()
     user = 'marco'
     tmpFile = tempfile.mkstemp(prefix='tuttle_', suffix="_"+user+".jpg", dir=tmpRenderingPath)
@@ -44,7 +43,6 @@ def newRender():
     r = renderScene.RenderScence()
     r.setProject(project, outputFilename=tmpFile[1])
     r.render()
-
     return jsonify(**ret)
 
 @app.route('/render/', methods=['GET'])

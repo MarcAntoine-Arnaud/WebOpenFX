@@ -2,6 +2,8 @@
 
 {% block headerExtension %}
 <link rel="stylesheet" type="text/css" href="/resources/css/plugin.css">
+<script src="/resources/js/jquery-2.1.3.min.js"></script>
+<script src="/resources/js/pluginRender.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -74,5 +76,9 @@
 			{% endfor %}
 			</div>
 		{% endfor %}
+	</div>
+	<div id="play">
+		<input type="button" value="render" id="render">
+		<div id="viewer"><img style="max-width:500px"/></div>
 	</div>
 {% endblock %}

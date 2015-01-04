@@ -7,11 +7,11 @@ class RenderScence:
 	nodes = []
 	def __init__(self):
 		tuttle.core().preload(False)
-		self.graph = tuttle.Graph()
+		g = tuttle.Graph()
+		self.graph = g
 
 	def setProject(self, project, outputFilename):
 		self.project = project
-		
 		try:
 			for node in project['nodes']:
 				tuttleNode = self.graph.createNode(str(node['plugin']))
