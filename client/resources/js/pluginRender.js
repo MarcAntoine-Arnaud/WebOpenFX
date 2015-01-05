@@ -1,7 +1,6 @@
 $(document).ready(function () {
-	$("#render").click(function(){
-		console.log("start rendering");
-
+	$("#render.OfxImageEffectContextGenerator").click(function(){
+		var pluginId = $(this)[0].getAttribute("pluginId");
 		$.ajax({
 			type: "POST",
 			url: "/render/",
@@ -9,7 +8,7 @@ $(document).ready(function () {
 			data: JSON.stringify({
 				nodes: [{
 					id: 0,
-					plugin: "tuttle.colorwheel"
+					plugin: pluginId
 				},{
 					id: 1,
 					plugin: "tuttle.jpegwriter"

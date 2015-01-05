@@ -21,11 +21,13 @@
 		{% for property in data.WOFX_PLUGIN.properties %}
 			<div class="details">
 				<span>{{property.name}}</span>
-				<span>
+				<span>{{property.stringValue}}
 					{% if property.value|length == 1 %}
 						{{property.value[0]}}
 					{% else %}
-						{{property.value}}
+						{% for value in property.value %}
+							{{value}}
+						{% endfor%}
 					{% endif %}
 				</span>
 			</div>
@@ -78,7 +80,17 @@
 		{% endfor %}
 	</div>
 	<div id="play">
-		<input type="button" value="render" id="render">
+		<input type="button" value="render" id="render" pluginId="{{data.WOFX_PLUGIN.id}}"
+			{% for property in data.WOFX_PLUGIN.properties %}
+				{% if property.name == "OfxImageEffectPropSupportedContexts" %}
+					{% for context in property.value %}
+						{% if context != "OfxImageEffectContextGeneral" %}
+							class="{{context}}"
+						{% endif %}
+					{% endfor%}
+				{% endif %}
+			{% endfor %}
+		>
 		<div id="viewer"><img style="max-width:500px"/></div>
 	</div>
 {% endblock %}
