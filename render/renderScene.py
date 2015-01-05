@@ -2,13 +2,11 @@ import logging
 from pyTuttle import tuttle
 
 class RenderScence:
-	project = None
-	graph = None
-	nodes = []
 	def __init__(self):
 		tuttle.core().preload(False)
-		g = tuttle.Graph()
-		self.graph = g
+		self.project = None
+		self.graph = tuttle.Graph()
+		self.nodes = []
 
 	def setProject(self, project, outputFilename):
 		self.project = project
