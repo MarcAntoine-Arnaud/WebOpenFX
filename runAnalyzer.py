@@ -1,5 +1,11 @@
 #!/usr/bin/python
-from server import app
+from flask import Flask
+app = Flask(__name__, static_folder='', static_url_path='')
+
+from server import analyzePlugin
+from server import analyzer
+from server import plugin
+
 import ConfigParser
 
 configParser =  ConfigParser.RawConfigParser()

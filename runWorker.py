@@ -4,7 +4,7 @@ from logging.handlers import RotatingFileHandler
 import tempfile, ConfigParser, uuid, io, logging, os
 
 #class
-import renderScene
+from worker import renderScene
 
 configParser =  ConfigParser.RawConfigParser()
 configParser.read('configuration.conf')
@@ -130,7 +130,7 @@ def addResource():
 
     imgFile = "/resources/" + uid + "." + ext
 
-    f = open("../resources/" + uid + "." + ext, 'w')
+    f = open("resources/" + uid + "." + ext, 'w')
     f.write(img)
     f.close()
 
@@ -144,8 +144,8 @@ def addResource():
 
 @app.route('/resources/<resourceId>', methods=['GET'])
 def getResource(resourceId):
-    if os.path.isfile("../resources/"+resourceId):
-        return send_file("../resources/"+resourceId)
+    if os.path.isfile("resources/"+resourceId):
+        return send_file("resources/"+resourceId)
     abort(404)
     return
 
@@ -156,7 +156,7 @@ def getResourcesDict():
     return jsonify(**ret)
 
 def getAllResources():
-    for image in os.listdir("../resources"):
+    for image in os.listdir("resources"):
         _id = str(uuid.uuid4())
         listImg[_id] = "/resources/" + str(image)
 
