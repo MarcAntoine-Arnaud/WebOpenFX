@@ -17,7 +17,7 @@ app.jinja_env.globals['get_resource_as_string'] = get_resource_as_string
 
 
 configParser =  ConfigParser.RawConfigParser()
-configParser.read('client/configuration.conf')
+configParser.read('configuration.conf')
 version = "0.0.1"
 
 analyzeRootUri = configParser.get("APP_CLIENT", "analyzeRootUri")
