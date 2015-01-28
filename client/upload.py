@@ -12,11 +12,7 @@ from flask import (
 import requests
 import json
 
-
-
 from client import app
-
-
 
 UPLOAD_FOLDER = 'upload/'
 
@@ -27,48 +23,22 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
-
-
 @app.route('/upload')
 # @login_required
 def upld():
     return render_template('upload.html', uploaded=None)
 
-
-# @app.route('/uploaded')
-# def uplded():
-#     return render_template('configureUpload.html')
-
-
 @app.route('/bundle/<bundleId>/upload', methods=['POST'])
 # @login_required
 def upldfile(bundleId):
-    if request.method == 'POST':
-
-        # print basedir
-
-        saved_files_urls = []
-
-        #for f in request.files.getlist('file[]'):
-
-
-                # os.remove(os.path.join(updir, filename))
-
-            # return saved_files_urls[0]
-
-        header = {'content-type' : request.headers['content-type']}
-        req = requests.post('http://0.0.0.0:5002/bundle/'+bundleId+'/archive', data=request.data, headers = header)
-        return render_template('upload.html', uploaded="true")
-
-
-
+    header = {'content-type' : request.headers['content-type']}
+    req = requests.post('http://0.0.0.0:5002/bundle/'+bundleId+'/archive', data=request.data, headers = header)
+    return render_template('upload.html', uploaded="true")
 
 @app.route('/uploads/<filename>')
 # @login_required
 def uploaded_file(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
-
-
 
 @app.route('/bundle', methods=['POST'])
 def newMetaBundle() :
