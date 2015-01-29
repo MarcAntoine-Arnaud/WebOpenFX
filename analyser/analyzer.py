@@ -1,12 +1,13 @@
 #!/usr/bin/python
 from flask import Flask, jsonify,request, abort
 from pyTuttle import tuttle
-from server import analyzePlugin, plugin
 import logging, uuid, ConfigParser, requests, tarfile, os, multiprocessing, tempfile, shutil, os
 from multiprocessing import Process
 from logging.handlers import RotatingFileHandler
 
-from server import app
+import analyzePlugin
+import plugin
+#from analyser import app
 
 configParser =  ConfigParser.RawConfigParser()
 configParser.read('server/configuration.conf')

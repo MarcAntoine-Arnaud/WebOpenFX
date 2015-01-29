@@ -1,9 +1,10 @@
 from pyTuttle import tuttle
-from server import plugin
 from flask import jsonify
 import logging
 import json
 import uuid
+
+import plugin
 
 # logging.basicConfig(filename='/tmp/analyze.log',level=logging.DEBUG)
 
